@@ -2,12 +2,10 @@ import SimpleDialog from "./common/dialog/SimpleDialog";
 import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
-
-// import { editPost, clearErrorMsg, getPostsData } from "./posts/postSlice";
 import { editPost, getPostsData } from "./posts/postSlice";
 import { FC } from "react";
 import { RootState } from "../store";
-
+import { AppDispatch } from "../store";
 interface EditPostDialogProps {
   content: string;
   postID: string;
@@ -21,7 +19,8 @@ const EditPostDialog: FC<EditPostDialogProps> = ({
   openDialog,
   handleDialogClose,
 }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch<AppDispatch>();
+  const dispatch: AppDispatch = useDispatch();
 
   const { postsDataErrorMsg, submitLoader } = useSelector(
     (state: RootState) => state.posts
@@ -35,11 +34,17 @@ const EditPostDialog: FC<EditPostDialogProps> = ({
       const formJson = Object.fromEntries(formData.entries());
       const postContent = formJson.postContent as string;
       console.log("postContent", postContent);
+
       const response = await dispatch(editPost({ postID, postContent }));
+      /* 
+      Argument of type 'AsyncThunkAction<IEditPostResponse, IEditPostArgs, { rejectValue: IRejectedValue; state?: unknown; dispatch?: ThunkDispatch<unknown, unknown, UnknownAction> | undefined; ... 4 more ...; rejectedMeta?: unknown; }>' is not assignable to parameter of type 'UnknownAction'.ts(2345)
+      */
       console.log(response);
-      if (response?.meta?.requestStatus === "fulfilled") {
+      if (response.type === "posts/editPost/fulfilled") {
         handleDialogClose();
         dispatch(getPostsData());
+      } else {
+        console.error("Failed to edit post:", response);
       }
     },
   };
@@ -56,11 +61,7 @@ const EditPostDialog: FC<EditPostDialogProps> = ({
     >
       <Box sx={{ width: 800, maxWidth: "100%" }}>
         {postsDataErrorMsg !== "" && (
-          <Box
-            sx={{
-              color: "red",
-            }}
-          >
+          <Box sx={{ color: "red" }}>
             Error in creating post. Please try later.
           </Box>
         )}

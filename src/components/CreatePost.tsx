@@ -1,13 +1,12 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createANewPost, clearErrorMsg } from "./posts/postSlice";
+import { createANewPost, clearErrorMsg, getPostsData } from "./posts/postSlice";
 import ButtonMUI from "./common/button/ButtonMUI";
 import SimpleDialog from "./common/dialog/SimpleDialog";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import { RootState, AppDispatch } from "../store";
-
-const CreatePost = () => {
+const CreatePost: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { postsDataErrorMsg, submitLoader } = useSelector(
     (state: RootState) => state.posts
@@ -17,7 +16,7 @@ const CreatePost = () => {
 
   const handleDialogOpen = () => setOpenDialog(true);
 
-  const handleAutoDialogClose = () => {
+  const handleDialogClose = () => {
     setOpenDialog(false);
   };
 
@@ -28,13 +27,22 @@ const CreatePost = () => {
 
   const submitFormProps = {
     component: "form",
-    onSubmit: (event: FormEvent<HTMLFormElement>) => {
+    onSubmit: async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
       const formJson = Object.fromEntries(formData.entries());
       const postContent = formJson.postContent as string;
-      console.log("postContent", postContent);
-      dispatch(createANewPost({ postContent, handleAutoDialogClose }));
+      // console.log("postContent", postContent);
+      const response = await dispatch(
+        createANewPost({ postContent, handleDialogClose })
+      );
+      console.log(response);
+      if (response.type === "posts/createNewPost/fulfilled") {
+        handleDialogClose();
+        dispatch(getPostsData());
+      } else {
+        console.error("Failed to edit post:", response);
+      }
     },
   };
 

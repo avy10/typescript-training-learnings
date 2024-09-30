@@ -8,7 +8,7 @@ import { hideSnackbar, showSnackbar } from "./common/snackbar/snackbarSlice";
 import { RootState, AppDispatch } from "../store";
 
 const PostsList: React.FC = () => {
-  const { postsArr, loader, postsDataErrorMsg } = useSelector(
+  const { postsList, loader, postsDataErrorMsg } = useSelector(
     (state: RootState) => state.posts
   );
   const { open } = useSelector((state: RootState) => state.messageSnackbar);
@@ -46,10 +46,10 @@ const PostsList: React.FC = () => {
         hideAfter={15000}
       />
 
-      {postsArr.length === 0 ? (
+      {postsList.length === 0 ? (
         <p>No Posts Found</p>
       ) : (
-        postsArr?.map((eachPost: IPost) => (
+        postsList?.map((eachPost: IPost) => (
           <SinglePost key={eachPost?._id} eachPost={eachPost} />
         ))
       )}

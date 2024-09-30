@@ -63,12 +63,7 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
           loadingState={loadingState}
           loadingStateText={loadingStateText}
         />
-        <ButtonMUI
-          btnText={"Cancel"}
-          btnVariant="contained"
-          btnSize="medium"
-          eventHandler={handleClickDialogClose}
-        />
+        <ButtonMUI btnText={"Cancel"} eventHandler={handleClickDialogClose} />
       </DialogActions>
     </Dialog>
   );

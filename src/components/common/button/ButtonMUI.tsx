@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import Button from "@mui/material/Button";
 
 interface ButtonMUIProps {
@@ -8,7 +8,7 @@ interface ButtonMUIProps {
   btnVariant?: "text" | "outlined" | "contained";
 }
 
-const ButtonMUI: React.FC<ButtonMUIProps> = ({
+const ButtonMUI: FC<ButtonMUIProps> = ({
   btnText,
   eventHandler,
   btnSize = "medium",

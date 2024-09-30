@@ -1,4 +1,5 @@
-import React from "react";
+import { FC } from "react";
+
 import Button from "@mui/material/Button";
 
 interface SubmitButtonProps {
@@ -10,7 +11,7 @@ interface SubmitButtonProps {
   loadingStateText?: string;
 }
 
-const SubmitButton: React.FC<SubmitButtonProps> = ({
+const SubmitButton: FC<SubmitButtonProps> = ({
   btnText,
   btnSize = "medium",
   btnVariant = "contained",
@@ -18,9 +19,6 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
   loadingState = false,
   loadingStateText = "Loading",
 }) => {
-  console.log(loadingStateText);
-  console.log(loadingState);
-
   const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (clickHandlerFunction) {
