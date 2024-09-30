@@ -5,47 +5,47 @@ const JWT_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjlmZWNjZTMzZmE0NTVlZjg5ODA4YSIsImlhdCI6MTcyNjc1MTA1MywiZXhwIjoxNzU4Mjg3MDUzfQ.ScXemniTQ91mqpZMdvz5pI_tmqrvL-Imy5OiWEQIQSk";
 const PROJECT_ID = `lkkoqstnysf1`;
 
-interface Post {
+export interface IPost {
   // I am only using these two
   _id: string;
   content: string;
 }
 
-interface PostsResponse {
+interface IPostsResponse {
   status: string;
   results: number;
-  data: Post[];
+  data: IPost[];
 }
 
-interface CreatePostArgs {
+interface ICreatePostArgs {
   postContent: string;
   handleAutoDialogClose: () => void;
 }
 
-interface CreatePostResponse {
+interface ICreatePostResponse {
   status: string;
   message: string;
-  data: Post;
+  data: IPost;
 }
 
-interface EditPostArgs {
+interface IEditPostArgs {
   postID: string;
   postContent: string;
 }
 
-interface EditPostResponse {
+interface IEditPostResponse {
   status: string;
   message: string;
-  data: Post;
+  data: IPost;
 }
 
-interface PostsState {
-  postsArr: Post[];
+interface IPostsState {
+  postsArr: IPost[];
   loader: boolean;
   submitLoader: boolean;
   postsDataErrorMsg: string;
 }
-const postsInitialState: PostsState = {
+const postsInitialState: IPostsState = {
   postsArr: [],
   loader: false,
   submitLoader: false,
@@ -53,13 +53,13 @@ const postsInitialState: PostsState = {
 };
 
 export const getPostsData = createAsyncThunk<
-  PostsResponse,
+  IPostsResponse,
   void,
   { rejectValue: AxiosError }
 >("posts/getPosts", async (_, { rejectWithValue }) => {
   const host = `https://academics.newtonschool.co/api/v1/facebook/post`;
   try {
-    const response = await axios.get<PostsResponse>(host, {
+    const response = await axios.get<IPostsResponse>(host, {
       headers: {
         projectID: PROJECT_ID,
       },
@@ -71,8 +71,8 @@ export const getPostsData = createAsyncThunk<
 });
 
 export const createANewPost = createAsyncThunk<
-  CreatePostResponse,
-  CreatePostArgs,
+  ICreatePostResponse,
+  ICreatePostArgs,
   { rejectValue: AxiosError }
 >(
   "posts/createNewPost",
@@ -82,7 +82,7 @@ export const createANewPost = createAsyncThunk<
   ) => {
     const host: string = `https://academics.newtonschool.co/api/v1/facebook/post`;
     try {
-      const response = await axios.post<CreatePostResponse>(
+      const response = await axios.post<ICreatePostResponse>(
         host,
         {
           content: postContent,
@@ -113,7 +113,7 @@ export const deletePost = createAsyncThunk<
 >("posts/deletePost", async (postID, { rejectWithValue }) => {
   const host = `https://academics.newtonschool.co/api/v1/facebook/post/${postID}`;
   try {
-    const response = await axios.delete<Post>(host, {
+    const response = await axios.delete<IPost>(host, {
       headers: {
         projectID: PROJECT_ID,
         Authorization: `Bearer ${JWT_TOKEN}`,
@@ -126,8 +126,8 @@ export const deletePost = createAsyncThunk<
 });
 
 export const editPost = createAsyncThunk<
-  EditPostResponse,
-  EditPostArgs,
+  IEditPostResponse,
+  IEditPostArgs,
   { rejectValue: AxiosError }
 >(
   "posts/editPost",
@@ -138,7 +138,7 @@ export const editPost = createAsyncThunk<
     formData.append("content", postContent);
 
     try {
-      const response = await axios.patch<EditPostResponse>(host, formData, {
+      const response = await axios.patch<IEditPostResponse>(host, formData, {
         headers: {
           projectID: PROJECT_ID,
           Authorization: `Bearer ${JWT_TOKEN}`,
@@ -168,7 +168,7 @@ const postSlice = createSlice({
       })
       .addCase(
         getPostsData.fulfilled,
-        (state, action: PayloadAction<PostsResponse>) => {
+        (state, action: PayloadAction<IPostsResponse>) => {
           state.loader = false;
           state.postsArr = Array.isArray(action.payload.data)
             ? action.payload.data
@@ -192,7 +192,7 @@ const postSlice = createSlice({
       })
       .addCase(
         createANewPost.fulfilled,
-        (state, action: PayloadAction<CreatePostResponse>) => {
+        (state, action: PayloadAction<ICreatePostResponse>) => {
           state.submitLoader = false;
           action.meta.arg.handleAutoDialogClose();
           state.postsDataErrorMsg = "";
@@ -208,7 +208,7 @@ const postSlice = createSlice({
       .addCase(deletePost.pending, (state) => {
         state.submitLoader = true;
       })
-      .addCase(deletePost.fulfilled, (state, action: PayloadAction<Post>) => {
+      .addCase(deletePost.fulfilled, (state, action: PayloadAction<IPost>) => {
         state.submitLoader = false;
         state.postsDataErrorMsg = "";
       })
@@ -224,7 +224,7 @@ const postSlice = createSlice({
       })
       .addCase(
         editPost.fulfilled,
-        (state, action: PayloadAction<EditPostResponse>) => {
+        (state, action: PayloadAction<IEditPostResponse>) => {
           state.submitLoader = false;
           state.postsDataErrorMsg = "";
         }

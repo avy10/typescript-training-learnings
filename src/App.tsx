@@ -4,11 +4,12 @@ import Container from "@mui/material/Container";
 
 import "./App.css";
 import CreatePost from "./components/CreatePost";
+import PostsList from "./components/PostsList";
 
 const App: FC = () => {
   return (
     <Container
-      maxWidth="md"
+      maxWidth="lg"
       className="app"
       sx={{
         display: "flex",
@@ -19,6 +20,7 @@ const App: FC = () => {
     >
       <h1>Facebook feed</h1>
       <CreatePost />
+      <PostsList />
     </Container>
   );
 };
