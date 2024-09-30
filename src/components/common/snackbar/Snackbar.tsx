@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import Snackbar from "@mui/material/Snackbar";
 
-interface MessageSnackbarProps {
+interface IMessageSnackbarProps {
   open: boolean;
   onCloseHandle: () => void;
   message: string;
@@ -11,7 +11,7 @@ interface MessageSnackbarProps {
   hideAfter?: number;
 }
 
-const MessageSnackbar: FC<MessageSnackbarProps> = ({
+const MessageSnackbar: FC<IMessageSnackbarProps> = ({
   open,
   onCloseHandle,
   message,
