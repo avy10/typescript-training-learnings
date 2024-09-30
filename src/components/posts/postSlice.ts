@@ -40,13 +40,13 @@ interface IEditPostResponse {
 }
 
 interface IPostsState {
-  postsArr: IPost[];
+  postsList: IPost[];
   loader: boolean;
   submitLoader: boolean;
   postsDataErrorMsg: string;
 }
 const postsInitialState: IPostsState = {
-  postsArr: [],
+  postsList: [],
   loader: false,
   submitLoader: false,
   postsDataErrorMsg: "",
@@ -170,7 +170,7 @@ const postSlice = createSlice({
         getPostsData.fulfilled,
         (state, action: PayloadAction<IPostsResponse>) => {
           state.loader = false;
-          state.postsArr = Array.isArray(action.payload.data)
+          state.postsList = Array.isArray(action.payload.data)
             ? action.payload.data
             : [];
           state.postsDataErrorMsg = "";
