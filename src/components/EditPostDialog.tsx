@@ -1,11 +1,11 @@
-import SimpleDialog from "./common/dialog/SimpleDialog";
-import { Box } from "@mui/material";
+import { FC, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { editPost, getPostsData } from "./posts/postSlice";
-import { FC } from "react";
-import { RootState } from "../store";
 import { AppDispatch } from "../store";
+import { RootState } from "../store";
+import { editPost, getPostsData } from "./posts/postSlice";
+import SimpleDialog from "./common/dialog/SimpleDialog";
 interface EditPostDialogProps {
   content: string;
   postID: string;
@@ -28,10 +28,15 @@ const EditPostDialog: FC<EditPostDialogProps> = ({
 
   const submitFormProps = {
     component: "form",
-    onSubmit: async (event: React.FormEvent<HTMLFormElement>) => {
+    onSubmit: async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
+      // console.log(event.currentTarget); // the form element and it's children
+      // console.log(formData.entries()); // just an iterator
       const formJson = Object.fromEntries(formData.entries());
+      console.log("formData in edit post", formData, typeof formData);
+      console.log("formJson in edit post", formJson);
+
       const postContent = formJson.postContent as string;
       console.log("postContent", postContent);
 

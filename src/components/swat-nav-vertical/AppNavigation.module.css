@@ -1,0 +1,9 @@
+.mainNav {
+  background: #09436d;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 5px;
+  width: 100vw;
+}

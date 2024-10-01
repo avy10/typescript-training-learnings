@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SinglePost from "./SinglePost";
 import { getPostsData, clearErrorMsg, IPost } from "./posts/postSlice";
@@ -7,7 +7,7 @@ import MessageSnackbar from "./common/snackbar/Snackbar";
 import { hideSnackbar, showSnackbar } from "./common/snackbar/snackbarSlice";
 import { RootState, AppDispatch } from "../store";
 
-const PostsList: React.FC = () => {
+const PostsList: FC = () => {
   const { postsList, loader, postsDataErrorMsg } = useSelector(
     (state: RootState) => state.posts
   );

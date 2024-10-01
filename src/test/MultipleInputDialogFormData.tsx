@@ -7,38 +7,39 @@ import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import { RootState } from "../store";
 
-const MultipleInputDialogBox: FC = () => {
+const MultipleInputDialogBoxFormData: FC = () => {
   const { postsDataErrorMsg, submitLoader } = useSelector(
     (state: RootState) => state.posts
   );
 
   const [openDialog, setOpenDialog] = useState<boolean>(false);
 
-  const [postContent, setPostContent] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [selectValue, setSelectValue] = useState<string>("");
-
   const handleDialogOpen = () => setOpenDialog(true);
 
   const handleClickDialogClose = () => {
     setOpenDialog(false);
-
-    setPostContent("");
-    setEmail("");
-    setSelectValue("");
   };
 
   const submitFormProps = {
     component: "form",
     onSubmit: async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      const formJson = Object.fromEntries(formData.entries());
+      console.log("formData in edit post", formData, typeof formData);
+      console.log("formJson in edit post", formJson);
+
+      const { postContent, email, selectValue } = formJson;
       console.log(postContent, email, selectValue);
     },
   };
 
   return (
     <div>
-      <ButtonMUI btnText={"Create Post"} eventHandler={handleDialogOpen} />
+      <ButtonMUI
+        btnText={"Multiple Input Form Data"}
+        eventHandler={handleDialogOpen}
+      />
       <SimpleDialog
         openDialog={openDialog}
         handleClickDialogClose={handleClickDialogClose}
@@ -66,8 +67,6 @@ const MultipleInputDialogBox: FC = () => {
             multiline
             rows={4}
             placeholder="What's on your mind, User?"
-            value={postContent}
-            onChange={(e) => setPostContent(e.target.value)}
           />
 
           <TextField
@@ -79,8 +78,6 @@ const MultipleInputDialogBox: FC = () => {
             variant="outlined"
             type="email"
             placeholder="Your email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
 
           <TextField
@@ -91,8 +88,7 @@ const MultipleInputDialogBox: FC = () => {
             fullWidth
             id="select-input-box"
             variant="outlined"
-            value={selectValue}
-            onChange={(e) => setSelectValue(e.target.value)}
+            value={"option1"}
           >
             <MenuItem value="option1">Option 1</MenuItem>
             <MenuItem value="option2">Option 2</MenuItem>
@@ -104,4 +100,4 @@ const MultipleInputDialogBox: FC = () => {
   );
 };
 
-export default MultipleInputDialogBox;
+export default MultipleInputDialogBoxFormData;
