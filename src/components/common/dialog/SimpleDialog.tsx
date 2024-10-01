@@ -1,4 +1,4 @@
-import React from "react";
+import { ReactNode, FC } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -9,7 +9,7 @@ import ButtonMUI from "../button/ButtonMUI";
 import SubmitButton from "../button/SubmitButton";
 
 interface SimpleDialogProps {
-  children: React.ReactNode;
+  children: ReactNode;
   openDialog: boolean;
   handleClickDialogClose: () => void;
   dialogTitle: string;
@@ -18,9 +18,10 @@ interface SimpleDialogProps {
   ariaLabelMsg?: string;
   loadingState?: boolean;
   loadingStateText?: string;
+  submitBtnClickHandler?: () => Promise<void>;
 }
 
-const SimpleDialog: React.FC<SimpleDialogProps> = ({
+const SimpleDialog: FC<SimpleDialogProps> = ({
   children,
   openDialog,
   handleClickDialogClose,
@@ -30,9 +31,8 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
   ariaLabelMsg = "Generic Dialog Box",
   loadingState = false,
   loadingStateText = "Loading...",
+  submitBtnClickHandler,
 }) => {
-  console.log("SimpleDialog Rendered");
-
   return (
     <Dialog
       onClose={handleClickDialogClose}
@@ -62,6 +62,9 @@ const SimpleDialog: React.FC<SimpleDialogProps> = ({
           btnText={dialogActionName}
           loadingState={loadingState}
           loadingStateText={loadingStateText}
+          clickHandlerFunction={
+            submitBtnClickHandler ? submitBtnClickHandler : undefined
+          }
         />
         <ButtonMUI btnText={"Cancel"} eventHandler={handleClickDialogClose} />
       </DialogActions>

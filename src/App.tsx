@@ -5,6 +5,7 @@ import Container from "@mui/material/Container";
 import "./App.css";
 import CreatePost from "./components/CreatePost";
 import PostsList from "./components/PostsList";
+// import MultipleInputDialogBox from "./test/MultipleInputDialogBox";
 
 const App: FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: FC = () => {
       <h1>Facebook feed</h1>
       <CreatePost />
       <PostsList />
+      {/* <MultipleInputDialogBox /> */}
     </Container>
   );
 };

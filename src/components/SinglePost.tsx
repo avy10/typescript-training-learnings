@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import { useDispatch } from "react-redux";
 import { clearErrorMsg } from "./posts/postSlice";
-import DeletePost from "./DeletePost";
 import Box from "@mui/material/Box";
 import ButtonMUI from "./common/button/ButtonMUI";
-import EditPostDialog from "./EditPostDialog";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-const SinglePost = ({ eachPost }) => {
+import EditPostDialog from "./EditPostDialog";
+import DeletePost from "./DeletePost";
+interface ISinglePost {
+  _id: string;
+  content: string;
+}
+interface ISinglePostProps {
+  eachPost: ISinglePost;
+}
+const SinglePost: FC<ISinglePostProps> = ({ eachPost }) => {
   const dispatch = useDispatch();
 
   const [editModal, setEditModal] = useState(false);
@@ -50,7 +57,7 @@ const SinglePost = ({ eachPost }) => {
               }}
               btnSize="small"
             />
-            <DeletePost content={eachPost?.content} postID={eachPost?._id} />
+            <DeletePost postID={eachPost?._id} />
           </div>
         </Box>
       </CardContent>

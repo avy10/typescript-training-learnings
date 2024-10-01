@@ -8,6 +8,7 @@ import { Box } from "@mui/material";
 import { RootState, AppDispatch } from "../store";
 const CreatePost: FC = () => {
   const dispatch: AppDispatch = useDispatch();
+
   const { postsDataErrorMsg, submitLoader } = useSelector(
     (state: RootState) => state.posts
   );
@@ -55,6 +56,7 @@ const CreatePost: FC = () => {
         dialogTitle={"Create post"}
         dialogActionName={"Post"}
         paperPropsObject={submitFormProps}
+        ariaLabelMsg={"Create a new post."}
         loadingState={submitLoader}
         loadingStateText="Posting..."
       >

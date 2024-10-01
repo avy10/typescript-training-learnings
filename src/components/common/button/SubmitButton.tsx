@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, MouseEvent } from "react";
 
 import Button from "@mui/material/Button";
 
@@ -19,9 +19,12 @@ const SubmitButton: FC<SubmitButtonProps> = ({
   loadingState = false,
   loadingStateText = "Loading",
 }) => {
-  const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  console.log(clickHandlerFunction);
+  const handleOnClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     if (clickHandlerFunction) {
+      /* bcz clickHandlerFunction can be undefined, 
+      we should check if it is present or not */
       clickHandlerFunction();
     }
   };

@@ -16,18 +16,17 @@ const PostsList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    const fetchNewPosts = async () => {
+      const response = await dispatch(getPostsData());
+      console.log(response);
+      if (response?.meta?.requestStatus === "rejected") {
+        dispatch(
+          showSnackbar({ message: "Error in fetching.", showDuration: 6000 })
+        );
+      }
+    };
     fetchNewPosts();
-  }, []);
-
-  const fetchNewPosts = async () => {
-    const response = await dispatch(getPostsData());
-    console.log(response);
-    if (response?.meta?.requestStatus === "rejected") {
-      dispatch(
-        showSnackbar({ message: "Error in fetching.", showDuration: 6000 })
-      );
-    }
-  };
+  }, [dispatch]);
 
   const handleSnackbarClose = (reason?: string) => {
     if (reason === "clickaway") return;

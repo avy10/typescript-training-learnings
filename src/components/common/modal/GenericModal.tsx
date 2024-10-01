@@ -2,7 +2,7 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import { ReactNode } from "react";
+import { FC, ReactElement } from "react";
 import { SxProps } from "@mui/material";
 
 interface GenericModalProps {
@@ -12,18 +12,18 @@ interface GenericModalProps {
   openModal: boolean;
   handleModalClose: () => void;
   needBox?: boolean;
-  children: ReactNode;
+  children: ReactElement;
 }
 
-const GenericModal = ({
+const GenericModal: FC<GenericModalProps> = ({
+  children,
   customStyles = {},
   modalTitle = "generic-modal",
   modalDescription = "this-is-a-generic-modal",
   openModal,
   handleModalClose,
   needBox = true,
-  children,
-}: GenericModalProps) => {
+}) => {
   const style: SxProps = {
     position: "absolute",
     top: "50%",
@@ -37,33 +37,29 @@ const GenericModal = ({
     ...customStyles,
   };
 
-  if (needBox) {
-    return (
-      <Modal
-        open={openModal}
-        onClose={handleModalClose}
-        aria-labelledby={modalTitle}
-        aria-describedby={modalDescription}
-        disableEnforceFocus
-      >
-        <Box sx={style} className="modal-content-box">
-          <Box className="close-modal-button-box">
-            <IconButton
-              className="modal-close-button"
-              aria-label="close"
-              size="large"
-              onClick={handleModalClose}
-            >
-              <CloseIcon sx={{ color: "black", fontSize: "18px" }} />
-            </IconButton>
-          </Box>
-          {children}
+  return needBox ? (
+    <Modal
+      open={openModal}
+      onClose={handleModalClose}
+      aria-labelledby={modalTitle}
+      aria-describedby={modalDescription}
+      disableEnforceFocus
+    >
+      <Box sx={style} className="modal-content-box">
+        <Box className="close-modal-button-box">
+          <IconButton
+            className="modal-close-button"
+            aria-label="close"
+            size="large"
+            onClick={handleModalClose}
+          >
+            <CloseIcon sx={{ color: "black", fontSize: "18px" }} />
+          </IconButton>
         </Box>
-      </Modal>
-    );
-  }
-
-  return (
+        {children}
+      </Box>
+    </Modal>
+  ) : (
     <Modal
       open={openModal}
       onClose={handleModalClose}

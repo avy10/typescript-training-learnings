@@ -1,27 +1,23 @@
 import { useState, FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { Box } from "@mui/material";
 import { AppDispatch, RootState } from "../store";
 import { deletePost, getPostsData, clearErrorMsg } from "./posts/postSlice";
-import { Box } from "@mui/material";
 import ButtonMUI from "./common/button/ButtonMUI";
-import GenericModal from "./common/modal/GenericModal";
-import SubmitButton from "./common/button/SubmitButton";
-
+import SimpleDialog from "./common/dialog/SimpleDialog";
 interface DeletePostProps {
   postID: string;
 }
-
-// const DeletePost = ({ postID }: DeletePostProps): JSX.Element => {
-
 const DeletePost: FC<DeletePostProps> = ({ postID }) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const { submitLoader, postsDataErrorMsg } = useSelector(
     (state: RootState) => state.posts
   );
   const dispatch = useDispatch<AppDispatch>();
-
   const postDeletion = async (): Promise<void> => {
+    console.log("DELEte post is running");
     const response = await dispatch(deletePost(postID));
+    console.log("response in delepost", response);
     if (response?.meta?.requestStatus === "fulfilled") {
       closeDeleteModal();
       dispatch(getPostsData());
@@ -37,48 +33,36 @@ const DeletePost: FC<DeletePostProps> = ({ postID }) => {
     dispatch(clearErrorMsg());
   };
 
-  const customStyles: React.CSSProperties = { textAlign: "center" };
-
   return (
     <>
       <ButtonMUI
         eventHandler={openDeleteModal}
-        btnText={"DELETE"}
-        btnSize="small"
+        btnText={"delete"}
+        btnSize={"small"}
       />
-      <GenericModal
-        openModal={showDeleteModal}
-        handleModalClose={closeDeleteModal}
-        modalTitle="delete-post-modal"
-        modalDescription="This is a window which asks the user for confirmation before deleting the post"
-        customStyles={customStyles}
+      <SimpleDialog
+        openDialog={showDeleteModal}
+        handleClickDialogClose={closeDeleteModal}
+        dialogTitle={"Confirm Deletion"}
+        dialogActionName={"Yes"}
+        ariaLabelMsg={"delete the post."}
+        loadingState={submitLoader}
+        loadingStateText="deleting..."
+        submitBtnClickHandler={postDeletion}
       >
-        <h3>Are you sure you want to delete the post?</h3>
-        {postsDataErrorMsg && (
-          <Box
-            sx={{
-              color: "red",
-            }}
-          >
-            Error in deleting post. Please try later.
-          </Box>
-        )}
-
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-evenly",
-          }}
-        >
-          <SubmitButton
-            btnText={"Yes"}
-            clickHandlerFunction={postDeletion}
-            loadingState={submitLoader}
-            loadingStateText="Deleting..."
-          />
-          <ButtonMUI btnText={"No"} eventHandler={closeDeleteModal} />
-        </Box>
-      </GenericModal>
+        <>
+          <h4>Are you sure you want to delete the post?</h4>
+          {postsDataErrorMsg && (
+            <Box
+              sx={{
+                color: "red",
+              }}
+            >
+              Error in deleting post. Please try later.
+            </Box>
+          )}
+        </>
+      </SimpleDialog>
     </>
   );
 };
