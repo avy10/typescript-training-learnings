@@ -2,7 +2,6 @@ import { useState, KeyboardEvent, FC } from "react";
 import { Box, Typography } from "@mui/material";
 import { MENU_DATA } from "../../utils/menuData";
 import styles from "./AppNavigation.module.css";
-// Define the type for each menu item
 interface INestedMenuItem {
 	label: string;
 	path: string;
@@ -10,13 +9,13 @@ interface INestedMenuItem {
 
 interface ISubMenuItem {
 	label: string;
-	submenu?: INestedMenuItem[]; // Optional submenu for deeper levels
-	path?: string; // Some items may not have a path
+	submenu?: INestedMenuItem[];
+	path?: string;
 }
 
 interface IMenuItem {
 	label: string;
-	submenu?: ISubMenuItem[]; // Optional submenu for secondary levels
+	submenu?: ISubMenuItem[];
 	path?: string;
 }
 
@@ -77,8 +76,8 @@ const SingleNavTab: React.FC<{ menuItem: IMenuItem; activeNavTab: string }> = ({
 				borderLeft: "1px solid rgba(255, 255, 255, 0.4)",
 				cursor: "pointer",
 				"&:hover": {
-					background: "white", // Change background on hover
-					color: "#09436d", // Change text color on hover
+					background: "white",
+					color: "#09436d",
 				},
 			}}
 		>
