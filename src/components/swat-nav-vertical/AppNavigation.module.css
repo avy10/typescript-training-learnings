@@ -1,9 +1,11 @@
 .mainNav {
-  background: #09436d;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 5px;
-  width: 100vw;
+	background: #09436d;
+	color: white;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+	column-gap: 0px;
+	/* padding: 10px; */
+	width: 100vw;
+	position: relative;
 }
