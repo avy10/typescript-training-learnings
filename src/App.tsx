@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import { MENU_DATA } from "./utils/menuData";
 import DefaultNavPage from "./components/DefaultNavPage";
-
+import AppNavigation from "./components/swat-nav-vertical/AppNavigation";
 interface ITertiaryNav {
   label: string;
   path: string;
@@ -19,6 +19,8 @@ const App: FC = () => {
   console.log("refresh");
   return (
     <BrowserRouter>
+      <AppNavigation />
+
       <Routes>
         <Route path="/" element={<Home />} />
 
