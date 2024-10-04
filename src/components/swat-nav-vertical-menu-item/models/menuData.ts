@@ -1,4 +1,4 @@
-export const MENU_DATA = [
+const MENU_DATA = [
   {
     label: "My Inbox",
     path: "swat/my-inbox",
@@ -83,7 +83,7 @@ export const MENU_DATA = [
   },
   {
     label: "Dashboards",
-    path: "swat/dashboards",
+    path: undefined,
     submenu: [
       {
         label: "Office Dashboard",
@@ -112,7 +112,7 @@ export const MENU_DATA = [
   },
   {
     label: "Admin",
-    path: "swat/admin",
+    path: undefined,
     submenu: [
       {
         label: "Administration",
@@ -236,7 +236,7 @@ export const MENU_DATA = [
   },
   {
     label: "Support",
-    path: "swat/support",
+    path: undefined,
     submenu: [
       {
         label: "Create New Document",
@@ -281,8 +281,8 @@ export const MENU_DATA = [
     ],
   },
   {
-    label: "Report",
-    path: "swat/report",
+    label: "Reports",
+    path: undefined,
     submenu: [
       {
         label: "Dashboard Export",
@@ -291,3 +291,5 @@ export const MENU_DATA = [
     ],
   },
 ];
+
+export default MENU_DATA;

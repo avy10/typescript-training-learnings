@@ -5,7 +5,8 @@ import { MENU_DATA } from "./utils/menuData";
 import DefaultNavPage from "./components/DefaultNavPage";
 // import AppNavigation from "./components/swat-nav-vertical/AppNavigation";
 import "./App.css";
-import AppNav from "./components/swat-nav-vertical/AppNav";
+import AppNav from "./components/swat-nav-vertical-menu-item/AppNav";
+// import AppNav from "./components/swat-nav-vertical/AppNav";
 interface ITertiaryNav {
   label: string;
   path: string;
@@ -22,8 +23,8 @@ const App: FC = () => {
   return (
     <BrowserRouter>
       {/* <AppNavigation /> */}
+      {/* <AppNav />   */} {/* box based */}
       <AppNav />
-
       <Routes>
         <Route path="/" element={<Home />} />
 
