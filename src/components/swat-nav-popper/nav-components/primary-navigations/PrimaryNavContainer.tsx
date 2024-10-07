@@ -1,10 +1,10 @@
 // import { useState, FC, ReactElement, MouseEvent } from "react";
-import { FC, MouseEvent, useEffect, useState } from "react";
-import { Box, MenuItem } from "@mui/material";
+import { FC, MouseEvent } from "react";
+import { Box } from "@mui/material";
 import PrimaryNavTextBox from "./PrimaryNavTextBox";
 import { ISubMenuItem } from "../../models";
-import { NavLink } from "react-router-dom";
 import MenuBoxPaper from "../common/MenuBoxPaper";
+import PrimaryMenuItem from "./PrimaryMenuItem";
 interface IPrimaryNavContainerProps {
   isActive: boolean;
   label: string;
@@ -30,21 +30,6 @@ const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
   submenu,
   hoverAction,
 }) => {
-  const [nestedAnchorEl, setNestedAnchorEl] = useState<null | HTMLElement>(
-    null
-  );
-  const updateNestedAnchorEl = (event: MouseEvent<HTMLElement>) => {
-    setNestedAnchorEl(event.currentTarget);
-    // console.log(event.currentTarget);
-  };
-  const clearNestedAnchorEl = () => {
-    setNestedAnchorEl(null);
-  };
-
-  const nestedHoverAction = (event: MouseEvent<HTMLElement>) => {
-    console.log(event.currentTarget);
-    setNestedAnchorEl(event.currentTarget);
-  };
   // useEffect(() => {
   //   console.log(nestedAnchorEl);
   // }, [nestedAnchorEl]);
@@ -57,7 +42,7 @@ const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
         }
       }}
       onMouseOver={hoverAction}
-      // onMouseLeave={clearAnchorEl}
+      onMouseLeave={clearAnchorEl}
       sx={{
         background: isActive ? "white" : "#09436d",
         color: isActive ? "#09436d" : "white",
@@ -97,77 +82,7 @@ const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
         >
           {submenu.map((eachMenuItem, index) => {
             // console.log(eachMenuItem?.submenu);
-            return (
-              <MenuItem
-                key={index}
-                sx={{
-                  padding: 0,
-                  borderBottom: "1px solid #b5b5b5",
-                  margin: 0,
-                }}
-                onMouseOver={(event: MouseEvent<HTMLElement>) => {
-                  if (!eachMenuItem?.submenu?.length) {
-                    return;
-                  }
-                  event.stopPropagation();
-                  nestedHoverAction(event);
-                }}
-                onMouseLeave={() => {
-                  // if (!eachMenuItem?.submenu?.length) {
-                  //   return;
-                  // }
-                  clearNestedAnchorEl();
-                }}
-              >
-                <NavLink
-                  to={eachMenuItem.path || "swat/watchlist"}
-                  style={{
-                    padding: "10px",
-                    width: "100%",
-                    fontSize: "14px",
-                    fontWeight: 500,
-                  }}
-                >
-                  {eachMenuItem.label}
-                  {/* {eachMenuItem?.submenu?.length && (
-                    <MenuBoxPaper
-                      open={Boolean(nestedAnchorEl)}
-                      anchorEl={nestedAnchorEl}
-                      clearAnchorEl={clearNestedAnchorEl}
-                      placementValue="right-start"
-                    >
-                      {eachMenuItem.submenu.map((nestedMenuItem, index) => {
-                        return (
-                          <MenuItem
-                            key={index}
-                            sx={{
-                              padding: 0,
-                              borderBottom: "1px solid #b5b5b5",
-                              margin: 0,
-                            }}
-                          >
-                            <NavLink
-                              to={nestedMenuItem.path || "swat/watchlist"}
-                              style={{
-                                padding: "10px",
-                                width: "100%",
-                                fontSize: "14px",
-                                fontWeight: 500,
-                              }}
-                            >
-                              {nestedMenuItem.label}
-                            </NavLink>
-                          </MenuItem>
-                        );
-                      })}
-                    </MenuBoxPaper>
-                  )} */}
-                  {eachMenuItem?.submenu?.length &&
-                    nestedAnchorEl &&
-                    console.log("There is subarray", eachMenuItem.submenu)}
-                </NavLink>
-              </MenuItem>
-            );
+            return <PrimaryMenuItem key={index} eachMenuItem={eachMenuItem} />;
           })}
         </MenuBoxPaper>
       )}

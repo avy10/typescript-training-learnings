@@ -1,7 +1,7 @@
 // import { FC } from "react";
 import { useState, FC } from "react"; // 1
 // import { MENU_DATA } from "../../utils/menuData"
-import MENU_DATA from "./models/menuData";
+import { MENU_DATA } from "./models/menuData";
 import styles from "./AppNavigation.module.css";
 import PrimaryNavTab from "./nav-components/primary-navigations/PrimaryNavTab";
 import { Typography } from "@mui/material";

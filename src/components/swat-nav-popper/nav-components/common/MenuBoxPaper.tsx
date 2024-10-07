@@ -64,11 +64,12 @@ const MenuBoxPaper: FC<IMenuProps> = ({
         <Paper
           sx={{
             zIndex: 1001,
-
+            // width: "fit-content",
             boxShadow: "3px 2px 3px 0 #666",
-
+            maxWidth: "700px",
             maxHeight: "500px",
             overflowY: "auto",
+            overflowX: "auto",
             "&::-webkit-scrollbar": {
               width: "4px",
             },
