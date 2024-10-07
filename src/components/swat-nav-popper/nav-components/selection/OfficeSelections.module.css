@@ -1,0 +1,23 @@
+.selection {
+  height: min-content;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  column-gap: 5px;
+  color: white;
+}
+.selection select {
+  background-color: white;
+  color: black;
+  height: 25px;
+  width: 195px;
+}
+option {
+  color: black;
+  background-color: white;
+}
+.selection .MuiNativeSelect-icon {
+  color: white;
+  background-color: white;
+}

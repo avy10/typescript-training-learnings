@@ -3,11 +3,12 @@ import { useState, FC } from "react"; // 1
 // import { MENU_DATA } from "../../utils/menuData"
 import MENU_DATA from "./models/menuData";
 import styles from "./AppNavigation.module.css";
-import PrimaryNavTab from "./nav-components/PrimaryNavTab";
+import PrimaryNavTab from "./nav-components/primary-navigations/PrimaryNavTab";
 import { Typography } from "@mui/material";
 import List from "@mui/material/List";
+import OfficeSelections from "./nav-components/selection/OfficeSelections";
 
-const AppNav: FC = () => {
+const AppNavPopper: FC = () => {
   const [activeNavTab, setActiveNavTab] = useState<string>("swat/my-inbox");
 
   const updateActiveNavTab = (newRoute: string) => {
@@ -42,8 +43,9 @@ const AppNav: FC = () => {
           />
         ))}
       </List>
+      <OfficeSelections />
     </nav>
   );
 };
 
-export default AppNav;
+export default AppNavPopper;

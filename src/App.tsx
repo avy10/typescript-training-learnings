@@ -1,12 +1,14 @@
 import { FC } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import { MENU_DATA } from "./utils/menuData";
+// import { MENU_DATA } from "./utils/menuData";
+import MENU_DATA from "./components/swat-nav-vertical-menu-item/models/menuData";
 import DefaultNavPage from "./components/DefaultNavPage";
 // import AppNavigation from "./components/swat-nav-vertical/AppNavigation";
 import "./App.css";
-import AppNav from "./components/swat-nav-vertical-menu-item/AppNav";
-// import AppNav from "./components/swat-nav-vertical/AppNav";
+import AppNavMenuItem from "./components/swat-nav-vertical-menu-item/AppNavMenuItem";
+import AppNavPopper from "./components/swat-nav-popper/AppNavPopper";
+import AppNav from "./components/swat-nav-vertical/AppNav";
 interface ITertiaryNav {
   label: string;
   path: string;
@@ -23,8 +25,11 @@ const App: FC = () => {
   return (
     <BrowserRouter>
       {/* <AppNavigation /> */}
-      {/* <AppNav />   */} {/* box based */}
       <AppNav />
+      {/* box based */}
+      {/* <AppNavMenuItem /> */}
+      {/* menu item based */}
+      {/* <AppNavPopper /> */}
       <Routes>
         <Route path="/" element={<Home />} />
 
@@ -40,39 +45,42 @@ const App: FC = () => {
                 />
 
                 {primaryNavigation.submenu?.map(
-                  (secondaryNavigation: ISecondaryNav) => (
-                    <Route
-                      key={secondaryNavigation.path}
-                      path={secondaryNavigation.path}
-                    >
+                  (secondaryNavigation: ISecondaryNav) => {
+                    return (
                       <Route
-                        index
-                        element={
-                          <DefaultNavPage
-                            pageName={secondaryNavigation.label}
-                          />
-                        }
-                      />
-
-                      {secondaryNavigation.submenu?.map(
-                        (tertiaryNavigation) => (
-                          <Route
-                            key={tertiaryNavigation.path}
-                            path={tertiaryNavigation.path}
-                          >
-                            <Route
-                              index
-                              element={
-                                <DefaultNavPage
-                                  pageName={tertiaryNavigation.label}
-                                />
-                              }
+                        key={secondaryNavigation.path}
+                        // path={secondaryNavigation.path}
+                        path={secondaryNavigation.path.slice(18)}
+                      >
+                        <Route
+                          index
+                          element={
+                            <DefaultNavPage
+                              pageName={secondaryNavigation.label}
                             />
-                          </Route>
-                        )
-                      )}
-                    </Route>
-                  )
+                          }
+                        />
+
+                        {secondaryNavigation.submenu?.map(
+                          (tertiaryNavigation) => (
+                            <Route
+                              key={tertiaryNavigation.path}
+                              path={tertiaryNavigation.path}
+                            >
+                              <Route
+                                index
+                                element={
+                                  <DefaultNavPage
+                                    pageName={tertiaryNavigation.label}
+                                  />
+                                }
+                              />
+                            </Route>
+                          )
+                        )}
+                      </Route>
+                    );
+                  }
                 )}
               </Route>
             );
@@ -80,7 +88,7 @@ const App: FC = () => {
           return null; // Return null if path is not defined
         })}
 
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<div>route not found</div>} />
       </Routes>
     </BrowserRouter>
   );

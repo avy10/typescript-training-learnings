@@ -5,7 +5,7 @@ import Container from "@mui/material/Container";
 import CreatePost from "../components/CreatePost";
 // import MultipleInputDialogBoxStates from "./test/MultipleInputDialogBoxStates";
 // import MultipleInputDialogBoxFormData from "./test/MultipleInputDialogFormData";
-import PostsList from "../components/PostsList";
+// import PostsList from "../components/PostsList";
 
 const Home: FC = () => {
   return (
@@ -23,7 +23,7 @@ const Home: FC = () => {
       <CreatePost />
       {/* <MultipleInputDialogBoxStates /> */}
       {/* <MultipleInputDialogBoxFormData /> */}
-      <PostsList />
+      {/* <PostsList /> */}
     </Container>
   );
 };
