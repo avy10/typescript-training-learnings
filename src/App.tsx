@@ -25,11 +25,11 @@ const App: FC = () => {
   return (
     <BrowserRouter>
       {/* <AppNavigation /> */}
-      <AppNav />
+      {/* <AppNav /> */}
       {/* box based */}
       {/* <AppNavMenuItem /> */}
       {/* menu item based */}
-      {/* <AppNavPopper /> */}
+      <AppNavPopper />
       <Routes>
         <Route path="/" element={<Home />} />
 

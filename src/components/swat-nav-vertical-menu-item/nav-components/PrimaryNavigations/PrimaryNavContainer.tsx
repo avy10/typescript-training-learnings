@@ -1,5 +1,5 @@
 // import { useState, FC, ReactElement, MouseEvent } from "react";
-import { FC, MouseEvent } from "react";
+import { FC, MouseEvent, useState } from "react";
 import { Box, MenuItem } from "@mui/material";
 import PrimaryNavTextBox from "./PrimaryNavTextBox";
 import { ISubMenuItem } from "../../models";
@@ -12,13 +12,13 @@ interface IPrimaryNavContainerProps {
   //   path: string;
 
   updateActiveNavTab: (path: string) => void;
-  updateAnchorEl?: (event: MouseEvent<HTMLElement>) => void;
+  // updateAnchorEl?: (event: MouseEvent<HTMLElement>) => void;
 
-  anchorEl: null | HTMLElement;
-  clearAnchorEl: () => void;
+  // anchorEl: null | HTMLElement;
+  // clearAnchorEl: () => void;
 
   submenu: ISubMenuItem[] | undefined;
-  hoverAction?: (event: MouseEvent<HTMLElement>) => void;
+  // hoverAction?: (event: MouseEvent<HTMLElement>) => void;
 }
 
 const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
@@ -26,12 +26,36 @@ const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
   label,
 
   updateActiveNavTab,
-  updateAnchorEl,
-  anchorEl,
-  clearAnchorEl,
+  // updateAnchorEl,
+  // anchorEl,
+  // clearAnchorEl,
   submenu,
-  hoverAction,
+  // hoverAction,
 }) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const updateAnchorEl = (event: MouseEvent<HTMLElement>) => {
+    if (anchorEl !== event.currentTarget) {
+      setAnchorEl(event.currentTarget);
+      console.log("IF statement");
+    }
+    console.log("FN statement");
+  };
+  const clearAnchorEl = () => {
+    setAnchorEl(null);
+  };
+
+  const hoverAction = (event: MouseEvent<HTMLElement>) => {
+    // console.log(
+    //   "I am updating anchor element, OLD : ",
+    //   anchorEl,
+    //   " NEW : ",
+    //   event.currentTarget
+    // );
+    event.stopPropagation();
+    if (anchorEl !== event.currentTarget) {
+      setAnchorEl(event.currentTarget);
+    }
+  };
   return (
     <Box
       onClick={(event: MouseEvent<HTMLElement>) => {

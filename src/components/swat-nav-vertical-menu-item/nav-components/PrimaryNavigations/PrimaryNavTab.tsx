@@ -1,4 +1,5 @@
-import { useState, FC, ReactElement, MouseEvent } from "react";
+// import { useState, FC, ReactElement, MouseEvent } from "react";
+import { FC, ReactElement } from "react";
 import { NavLink } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 
@@ -18,29 +19,7 @@ const PrimaryNavTab: FC<IPrimaryNavTabProps> = ({
 }): ReactElement => {
   console.log("Re RENDER of PrimaryNavTab");
   const { path, label, submenu } = menuItem;
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const updateAnchorEl = (event: MouseEvent<HTMLElement>) => {
-    if (anchorEl !== event.currentTarget) {
-      setAnchorEl(event.currentTarget);
-      console.log("IF statement");
-    }
-    console.log("FN statement");
-  };
-  const clearAnchorEl = () => {
-    setAnchorEl(null);
-  };
 
-  const hoverAction = (event: MouseEvent<HTMLElement>) => {
-    // console.log(
-    //   "I am updating anchor element, OLD : ",
-    //   anchorEl,
-    //   " NEW : ",
-    //   event.currentTarget
-    // );
-    if (anchorEl !== event.currentTarget) {
-      setAnchorEl(event.currentTarget);
-    }
-  };
   // useEffect(() => {
   //   console.log(anchorEl);
   // }, [anchorEl]);
@@ -57,7 +36,7 @@ const PrimaryNavTab: FC<IPrimaryNavTabProps> = ({
         // <NavLink to={path} onClick={updateAnchorEl}>
         <NavLink
           to={path}
-          onClick={(event: MouseEvent<HTMLElement>) => updateAnchorEl(event)}
+          // onClick={(event: MouseEvent<HTMLElement>) => updateAnchorEl(event)}
         >
           {({ isActive }) => (
             <PrimaryNavContainer
@@ -66,9 +45,9 @@ const PrimaryNavTab: FC<IPrimaryNavTabProps> = ({
               submenu={submenu}
               // path={path}
               updateActiveNavTab={updateActiveNavTab}
-              anchorEl={anchorEl}
-              clearAnchorEl={clearAnchorEl}
-              hoverAction={hoverAction}
+              // anchorEl={anchorEl}
+              // clearAnchorEl={clearAnchorEl}
+              // hoverAction={hoverAction}
             />
           )}
         </NavLink>
@@ -79,10 +58,10 @@ const PrimaryNavTab: FC<IPrimaryNavTabProps> = ({
           submenu={submenu}
           // path={path}
           updateActiveNavTab={updateActiveNavTab}
-          updateAnchorEl={updateAnchorEl}
-          anchorEl={anchorEl}
-          clearAnchorEl={clearAnchorEl}
-          hoverAction={hoverAction}
+          // updateAnchorEl={updateAnchorEl}
+          // anchorEl={anchorEl}
+          // clearAnchorEl={clearAnchorEl}
+          // hoverAction={hoverAction}
         />
       )}
     </ListItem>

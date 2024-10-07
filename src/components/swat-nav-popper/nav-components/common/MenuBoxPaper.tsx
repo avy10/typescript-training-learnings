@@ -52,16 +52,19 @@ const MenuBoxPaper: FC<IMenuProps> = ({
   return (
     <ThemeProvider theme={theme}>
       <Popper
+        disablePortal
         open={open}
         anchorEl={anchorEl}
         role={undefined}
         placement={placementValue}
         sx={{
-          zIndex: 10,
+          zIndex: 1000,
         }}
       >
         <Paper
           sx={{
+            zIndex: 1001,
+
             boxShadow: "3px 2px 3px 0 #666",
 
             maxHeight: "500px",
@@ -79,7 +82,7 @@ const MenuBoxPaper: FC<IMenuProps> = ({
           }}
         >
           <ClickAwayListener onClickAway={menuBoxClose}>
-            <MenuList autoFocusItem={open}>{children}</MenuList>
+            <MenuList>{children}</MenuList>
           </ClickAwayListener>
         </Paper>
       </Popper>

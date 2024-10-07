@@ -1,67 +1,39 @@
-const MENU_DATA = [
+export const MENU_DATA = [
   {
     label: "My Inbox",
-    path: "swat/my-inbox",
+    path: "/swat/my-inbox",
     // submenu: [],
   },
   {
     label: "Watchlist",
-    path: "swat/watchlist",
+    path: "/swat/watchlist",
     // submenu: [],
   },
   {
     label: "Office Inbox",
-    path: "swat/office-inbox",
+    path: "/swat/office-inbox",
     submenu: [
       {
         label: "Mining Inbox",
-        path: "swat/office-inbox/mining",
-        submenu: [
-          {
-            label: "Mining Role ",
-            path: "swat/office-inbox/mining/role",
-          },
-          {
-            label: "Mining User ",
-            path: "swat/office-inbox/mining/user",
-          },
-          {
-            label: "Mining Office User ",
-            path: "swat/office-inbox/mining/office-user",
-          },
-        ],
+        path: "/swat/office-inbox/mining",
       },
       {
         label: "Oil & Gas Inbox",
-        path: "swat/office-inbox/oil-gas",
-        submenu: [
-          {
-            label: "Oil & Gas Role Administration",
-            path: "swat/office-inbox/oil-gas/role",
-          },
-          {
-            label: "Oil & Gas User Administration",
-            path: "swat/office-inbox/oil-gas/user",
-          },
-          {
-            label: "Oil & Gas Office User Administration",
-            path: "swat/office-inbox/oil-gas/office-user",
-          },
-        ],
+        path: "/swat/office-inbox/oil-gas",
       },
       {
         label: "Consolidated Inbox",
-        path: "swat/office-inbox/consolidated",
+        path: "/swat/consolidated",
       },
       {
         label: "BSO Inbox",
-        path: "swat/office-inbox/bso",
+        path: "/swat/bso",
       },
     ],
   },
   {
     label: "Workload",
-    path: "swat/workload",
+    path: "/swat/workload",
     submenu: [
       {
         label: "Create New Review ",
@@ -69,11 +41,11 @@ const MENU_DATA = [
       },
       {
         label: "View User Inbox",
-        path: "swat/view-user",
+        path: "/swat/view-user",
       },
       {
         label: "View User Open Reviews",
-        path: "swat/open-view",
+        path: "/swat/open-view",
       },
       {
         label: "Bulk Assignment  ",
@@ -82,65 +54,62 @@ const MENU_DATA = [
     ],
   },
   {
-    label: "Dashboards",
-    path: undefined,
+    label: "Dashboard",
+    path: "/swat/dashboard",
     submenu: [
       {
         label: "Office Dashboard",
-        path: "swat/office",
+        path: "/swat/office",
       },
       {
         label: "User Dashboard",
-        path: "swat/user",
+        path: "/swat/user",
       },
     ],
   },
   {
-    label: "Notifications",
-    path: "swat/notifications",
+    label: "Notification",
+    path: "/swat/notification",
     // submenu: [],
   },
   {
     label: "Search",
-    path: "swat/search",
+    path: "/swat/search",
     // submenu: [],
   },
   {
     label: "COOP",
-    path: "swat/coop",
+    path: "/swat/coop",
     // submenu: [],
   },
   {
     label: "Admin",
-    path: undefined,
+    path: "/swat/admin",
     submenu: [
       {
         label: "Administration",
-        path: "swat/administration",
+        path: "",
         submenu: [
           {
             label: "Role Administration",
-            path: "swat/role-admin",
+            path: "/swat/role-admin",
           },
           {
             label: "User Administration",
-            path: "swat/user-admin",
+            path: "/swat/user-admin",
           },
           {
             label: "Office User Administration",
-            path: "swat/office-user-admin",
+            path: "/swat/office-user-admin",
           },
         ],
       },
       {
         label: "Effect",
-        path: "swat/effect",
+        path: "/swat/effect",
         submenu: [
-          { label: "Effectiveness Queue", path: "swat/queue" },
-          {
-            label: "Effectiveness Transmitted",
-            path: "swat/transmitted",
-          },
+          { label: "Effectiveness Queue", path: "/swat/queue" },
+          { label: "Effectiveness Transmitted", path: "/swat/transmitted" },
           { label: "PAC Effect / Qualify", path: "pac-quality" },
         ],
       },
@@ -236,7 +205,7 @@ const MENU_DATA = [
   },
   {
     label: "Support",
-    path: undefined,
+    path: "/swat/support",
     submenu: [
       {
         label: "Create New Document",
@@ -281,8 +250,8 @@ const MENU_DATA = [
     ],
   },
   {
-    label: "Reports",
-    path: undefined,
+    label: "Report",
+    path: "/swat/report",
     submenu: [
       {
         label: "Dashboard Export",
@@ -291,5 +260,3 @@ const MENU_DATA = [
     ],
   },
 ];
-
-export default MENU_DATA;

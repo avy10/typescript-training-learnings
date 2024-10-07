@@ -11,9 +11,9 @@ const AppNavMenuItem: FC = () => {
   const [activeNavTab, setActiveNavTab] = useState<string>("swat/my-inbox");
 
   const updateActiveNavTab = (newRoute: string) => {
-    if (activeNavTab !== newRoute) {
-      setActiveNavTab(newRoute);
-    }
+    // if (activeNavTab !== newRoute) {
+    // }
+    setActiveNavTab(newRoute);
   }; //1
   return (
     <nav aria-labelledby="mainmenulabel" className={styles.mainNav}>

@@ -42,11 +42,12 @@ const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
   };
 
   const nestedHoverAction = (event: MouseEvent<HTMLElement>) => {
+    console.log(event.currentTarget);
     setNestedAnchorEl(event.currentTarget);
   };
-  useEffect(() => {
-    console.log(nestedAnchorEl);
-  }, [nestedAnchorEl]);
+  // useEffect(() => {
+  //   console.log(nestedAnchorEl);
+  // }, [nestedAnchorEl]);
   return (
     <Box
       onClick={(event: MouseEvent<HTMLElement>) => {
@@ -55,8 +56,8 @@ const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
           updateAnchorEl(event);
         }
       }}
-      onMouseEnter={hoverAction}
-      onMouseLeave={clearAnchorEl}
+      onMouseOver={hoverAction}
+      // onMouseLeave={clearAnchorEl}
       sx={{
         background: isActive ? "white" : "#09436d",
         color: isActive ? "#09436d" : "white",
@@ -95,7 +96,7 @@ const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
           clearAnchorEl={clearAnchorEl}
         >
           {submenu.map((eachMenuItem, index) => {
-            console.log(eachMenuItem?.submenu);
+            // console.log(eachMenuItem?.submenu);
             return (
               <MenuItem
                 key={index}
@@ -104,7 +105,7 @@ const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
                   borderBottom: "1px solid #b5b5b5",
                   margin: 0,
                 }}
-                onMouseEnter={(event: MouseEvent<HTMLElement>) => {
+                onMouseOver={(event: MouseEvent<HTMLElement>) => {
                   if (!eachMenuItem?.submenu?.length) {
                     return;
                   }
@@ -112,9 +113,9 @@ const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
                   nestedHoverAction(event);
                 }}
                 onMouseLeave={() => {
-                  if (!eachMenuItem?.submenu?.length) {
-                    return;
-                  }
+                  // if (!eachMenuItem?.submenu?.length) {
+                  //   return;
+                  // }
                   clearNestedAnchorEl();
                 }}
               >
@@ -161,6 +162,9 @@ const PrimaryNavContainer: FC<IPrimaryNavContainerProps> = ({
                       })}
                     </MenuBoxPaper>
                   )} */}
+                  {eachMenuItem?.submenu?.length &&
+                    nestedAnchorEl &&
+                    console.log("There is subarray", eachMenuItem.submenu)}
                 </NavLink>
               </MenuItem>
             );
